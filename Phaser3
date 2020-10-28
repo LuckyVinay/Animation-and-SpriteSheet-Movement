@@ -1,0 +1,173 @@
+what is their in the project ?
+the project consist of Animation with SpriteSheet Movement.
+this have just one scene in which all the function will happen
+
+
+//The Explanation of the script is given for everything you this you can understand this easily 
+
+<!DOCTYPE html>
+  <head>
+<script src="phaser.js"></script>
+  </head>
+  <body>
+   <script src="game.js"></script>
+  </body>
+</html>
+
+This is the HTML part of the animation script.  “ Index.html” file
+In this we have called two .js file.
+1.	With the name phaser.js is the phaser file which will be used.
+2.	This one name game.js is the main script for the animation of sprite.
+
+// configuration part of the Script
+
+3.	var config = {
+4.	    type: Phaser.AUTO, // The width and height properties set the size of the canvas element that Phaser will create
+5.	    width: 800,
+6.	    height: 600,
+7.	    gravity: {
+8.	                x: 0,
+9.	                y: 0,
+10.	                debug: false,
+11.	            },
+12.	    parent: 'phaser-example',  
+13.	    physics: 
+14.	    {
+15.	        default: 'arcade'
+16.	    }, backgroundColor: 0x27ae60,
+17.	
+18.	    scene: 
+19.	    {
+20.	        preload: preload,
+21.	        create: create,
+22.	        update: update
+23.	    }
+24.	};
+
+This is the configuration Setting required to configure the game on the platform.
+The config object is how you configure your Phaser Game.
+There are lots of options that can be places in this object.	
+
+An Instance of a Phaser.Game object is assigned to a local variable called Game and the config object is passed to it
+
+
+var mummy; //variable name defined as mummy.
+var cursors; // variable name defined as cursors.
+var game= new Phaser.Game(config);  /// object is passed
+function preload ()
+{    
+  this.load.spritesheet('mummy', 'assets/running.png', 
+ 	{frameWidth: 125, frameHeight:150, endFrame: 10});
+}
+
+var mummy is a variable defined.
+Var cursors is a variable defined.
+var game = new 
+Phaser.Game( Config );
+here the config object is passed so that it can inherit the poperties.
+In function preload, 
+The sprite sheet is loaded with variable name “ mummy “ and the sprite name is running.png “ .png “ is the file extension.
+In the next the value of width of the frame and height is given by the user with endFrame rate
+
+
+
+function create ()
+{
+  cursors = this.input.keyboard.createCursorKeys();
+    this.anims.create(
+      {
+        key: 'left',
+        frames: this.anims.generateFrameNumbers('mummy', { start: 0, end: 20 }),
+        frameRate: 15,
+        repeat: -1
+      });
+ mummy = this.add.sprite(200, 200, 'mummy'); 
+  mummy.anims.play('left', true);
+}
+
+The function create is defined here.
+frames: this.anims.generateFrameNumbers('mummy', { start: 0, end: 20 }),
+here the “ mummy “ variable is called and its start and end value is being given.
+mummy = this.add.sprite(200, 200, 'mummy'
+This have the location of the sprite sheet that where it will be located on that whole screen.
+And the button with which it will move.
+
+function update ()
+{
+  if (cursors.right.isDown) //  For example this checks if the up or down keys are pressed and moves the camera accordingly.
+   {
+    if (mummy.x !=700)
+     {
+       mummy.x += 0.5;  
+     }
+     
+   }
+ 
+}
+
+
+The function is updated here with
+//  For example this checks if the up or down keys are pressed and moves the camera accordingly. 
+And in the next if the value is not equal to 700 then their will be increment of 0.5.
+
+This was a example of animation with sprite.
+You can apply it if any confusion free to write here I will try to respond.
+
+
+// Complete Code
+
+
+var config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    gravity: {
+                x: 0,
+                y: 0,
+                debug: false,
+            },
+    parent: 'phaser-example',
+    physics: {
+        default: 'arcade'
+    }, backgroundColor: 0x27ae60,
+
+    scene: 
+    {
+        preload: preload,
+        create: create,
+        update: update
+    }
+};  
+
+var mummy;
+var cursors; 
+var game= new Phaser.Game(config);
+function preload ()
+{    
+  this.load.spritesheet('mummy', 'assets/running.png', {frameWidth: 125, frameHeight:150, endFrame: 10});
+}
+function create ()
+{
+  cursors = this.input.keyboard.createCursorKeys();
+    this.anims.create(
+      {
+        key: 'left',
+        frames: this.anims.generateFrameNumbers('mummy', { start: 0, end: 20 }),
+        frameRate: 15,
+        repeat: -1
+      });      
+  mummy = this.add.sprite(200, 200, 'mummy'); 
+  mummy.anims.play('left', true);
+}
+function update ()
+{
+  if (cursors.right.isDown)
+   {
+    if (mummy.x !=700)
+     {
+       mummy.x += 0.5;  
+     }
+     
+   }
+ 
+}
